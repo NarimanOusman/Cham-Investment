@@ -24,6 +24,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,3 +78,10 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'          # ← Collected here on Render
 STATICFILES_DIRS = [BASE_DIR / 'static']        # ← Your static/ folder
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Serve static files via Whitenoise
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
