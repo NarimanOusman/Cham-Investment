@@ -1,24 +1,17 @@
-"""
-Django settings for cham_investment project.
-For Cham Company – Production-ready for Render.
-"""
-
 from pathlib import Path
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-qgi%)*(q&nyjdxji$3b0xjle6stzz3)ps(6zlz6q)hybzv3$^@')
+# SECURITY: Never expose in Git
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-...your-fallback...')
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# MUST be False in production
 DEBUG = False
 
-# Allow your Render subdomain and localhost for testing
+# Allow Render's domain
 ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 
-# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -26,7 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cham',  # your app for Cham Company
+    'cham',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +51,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cham_investment.wsgi.application'
 
-# Database (SQLite is fine for demo/static site)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -66,7 +58,7 @@ DATABASES = {
     }
 }
 
-# Password validation
+# Keep your password validators
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -74,16 +66,14 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+# ✅ STATIC FILES — CRITICAL FOR RENDER
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'          # Render collects here
-STATICFILES_DIRS = [BASE_DIR / 'static']        # Your static/ folder
+STATIC_ROOT = BASE_DIR / 'staticfiles'          # ← Collected here on Render
+STATICFILES_DIRS = [BASE_DIR / 'static']        # ← Your static/ folder
 
-# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
