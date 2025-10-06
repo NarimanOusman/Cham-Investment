@@ -23,7 +23,6 @@ html, body {
     align-items: center;
     color: white;
     text-align: center;
-  
 }
 
 .overlay {
@@ -36,31 +35,37 @@ html, body {
     z-index: 1;
 }
 
-/* Move content slightly upward (about 10% from perfect center) */
 .hero-content {
     position: relative;
     z-index: 2;
     padding: 0 20px;
     max-width: 900px;
-    /* Push content up by 10% of the viewport height */
-    transform: translateY(-10%);
+    /* Keep content centered (no translateY) */
+    transform: none;
 }
 
-/* Staggered fade-in + slide-up animation */
+/* New: Explode-from-center animation */
 .animate {
     opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease-out forwards;
+    transform: scale(0.6);
+    animation: explodeIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-@keyframes fadeInUp {
-    to {
+@keyframes explodeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.4);
+    }
+    70% {
+        transform: scale(1.1); /* Overshoot for "pop" effect */
+    }
+    100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1);
     }
 }
 
-/* Stagger delays */
+/* Stagger delays for explosion effect */
 .hero-content h1.animate { animation-delay: 0.2s; }
 .hero-content p.animate  { animation-delay: 0.4s; }
 .hero-content .btn.animate { animation-delay: 0.6s; }
@@ -73,7 +78,6 @@ html, body {
     font-weight: 700;
     line-height: 1.2;
     color: #95d28e;
-   
 }
 
 .hero-content p {
@@ -106,12 +110,10 @@ html, body {
     color: #148f07;
 }
 
-/* Prevent horizontal scroll on all devices */
 body {
     overflow-x: hidden;
 }
 
-/* Optional: Improve tap behavior on iOS */
 .hero-section {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
