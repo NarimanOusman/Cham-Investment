@@ -6,7 +6,7 @@
     <title>home page</title>
        {% load static %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
-
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
     
@@ -36,14 +36,143 @@
     </div>
   </nav>
 
-  <!-- Your main content goes here -->
-  <main style="margin-top: 80px; padding: 2rem;">
-    <section style="height: 200vh; background: #fff; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-      <h1>Scroll down to see the fixed navbar in action!</h1>
-      <p>The navbar stays fixed while content scrolls under it.</p>
-      <p>Your logo <code>co.jpg</code> will appear on the left — make sure it's placed in your Django static folder.</p>
+  
+ 
+
+  
+
+ <main>
+    <!-- VIDEO HERO -->
+    <section class="video-section">
+      <video autoplay muted loop playsinline>
+        <source src="{% static 'images/cattle-video.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-text">
+        <h1>Exporting Premium Cattle from Africa to the World</h1>
+        <p>We provide quality from the beginning.</p>
+      </div>
     </section>
+
+    <!-- BENEFITS -->
+    <section class="benefits">
+      <div class="container">
+        <h2>Why Partner With Us?</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-cow"></i></div>
+            <h3>Extensive Experience</h3>
+            <p>Decades of expertise in cattle breeding and export logistics across Africa.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-award"></i></div>
+            <h3>High Quality</h3>
+            <p>Only the healthiest, genetically superior cattle meet our strict standards.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-headset"></i></div>
+            <h3>Excellent Service</h3>
+            <p>Dedicated support from inquiry to delivery — we’re with you every step.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="why-choose">
+      <div class="container">
+        <div class="why-content">
+          <div class="why-image">
+            <img src="{% static 'images/healthy-cow.jpg' %}" alt="Healthy cattle in green pasture">
+          </div>
+          <div class="why-text">
+            <h2>Why Choose Us?</h2>
+            <p>We care about every aspect of cattle farming — from nutrition to health care — to ensure the health and well-being of our cattle. Our farms follow sustainable, ethical practices that prioritize animal welfare and environmental responsibility.</p>
+            <a href="{% url 'about' %}" class="btn">Learn More About Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="container">
+        <h2>Our Global Impact</h2>
+        <div class="stats-grid">
+          <div class="stat-item"><h3>500+</h3><p>Cattle Exported</p></div>
+          <div class="stat-item"><h3>15+</h3><p>Countries Served</p></div>
+          <div class="stat-item"><h3>98%</h3><p>Client Satisfaction</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta" id="contact">
+      <div class="container">
+        <h2>Ready to source premium cattle?</h2>
+        <p>Let’s talk about your needs and how we can deliver exceptional livestock to your doorstep.</p>
+        <a href="{% url 'contact' %}" class="btn">Contact Us Today</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container footer-row">
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <a href="{% url 'home' %}">Home</a>
+          <a href="{% url 'about' %}">About Us</a>
+          <a href="{% url 'services' %}">Services</a>
+          <a href="{% url 'contact' %}">Contact</a>
+        </div>
+
+        <div class="footer-col contact">
+          <h3>Contact Us</h3>
+          <p>Email: <a href="mailto:chaminvestementsco.ltd@gmail.com">chaminvestementsco.ltd@gmail.com</a></p>
+          <p>WhatsApp: +250 794 444 444</p>
+          <p>Call: +250 791 222 222 or +62 858 8883 3444</p>
+          <div class="locations-dropdown">
+            <div>Rwanda</div>
+            <div>Uganda</div>
+            <div>Sudan</div>
+            <div>Kenya</div>
+            <div>Indonesia</div>
+            <div>Malaysia</div>
+            <div>Vietnam</div>
+          </div>
+          <div class="social-icons">
+            <a href="mailto:chaminvestementsco.ltd@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="https://wa.me/250794444444" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="tel:+250791222222"><i class="fas fa-phone"></i></a>
+            <a href="tel:+6285888833444"><i class="fas fa-phone"></i></a>
+          </div>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2025 Chaminvestements Co. Ltd. All rights reserved.</p>
+    </footer>
   </main>
+
+  <!-- Animation for cards -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.benefit-card');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('visible'), index * 200);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      cards.forEach(card => observer.observe(card));
+    });
+  </script>
+
+
+
+
+
+
 
   <script>
     // Toggle mobile menu
