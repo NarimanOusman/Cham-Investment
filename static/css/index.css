@@ -14,7 +14,7 @@ html, body {
     position: relative;
     width: 100vw;
     height: 100vh;
-    background-image: url('../images/image.png');
+    background-image: url('../images/co.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -31,7 +31,7 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 1;
 }
 
@@ -77,7 +77,8 @@ html, body {
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
     font-weight: 700;
     line-height: 1.2;
-    color: #95d28e;
+    color: cyan;
+    font-family: serif;
 }
 
 .hero-content p {
@@ -85,22 +86,24 @@ html, body {
     margin-bottom: 2rem;
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
     line-height: 1.4;
-    color: #3abeeef9;
+    color:cyan;
+       font-family: serif;
 }
 
 /* Button */
 .btn {
     display: inline-block;
     padding: 12px 32px;
-    background-color: #95d28e;
-    color: #148f07;
+    background-color: #cd7f32;
+    color: cyan;
     font-weight: bold;
     text-decoration: none;
-    border-radius: 30px;
+    border-radius: 10px;
     font-size: clamp(0.9rem, 2.8vw, 1.1rem);
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     min-width: 140px;
+       font-family: serif;
 }
 
 .btn:hover {
