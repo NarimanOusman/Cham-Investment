@@ -13,7 +13,7 @@ html, body {
 .hero-section {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     background-image: url('../images/co.jpg');
     background-size: cover;
     background-position: center;
