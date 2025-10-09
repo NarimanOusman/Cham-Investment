@@ -14,7 +14,7 @@
 </head>
 <body>
 
-  <!-- NAVBAR (fixed) -->
+  <!-- NAVBAR (fixed on all devices) -->
   <nav class="glass-navbar" id="navbar">
     <div class="nav-container">
       <div class="logo">
@@ -32,12 +32,14 @@
           <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
         </ul>
 
+        <!-- Hamburger: 3-line bar -->
         <button id="hamburger" class="hamburger" aria-label="Open menu" type="button">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
 
+    <!-- Mobile menu slides in from right -->
     <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
       <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
@@ -65,6 +67,11 @@
 
       <button id="muteToggle" class="mute-toggle" aria-pressed="false" title="Mute/unmute video">
         <i class="fas fa-volume-up"></i>
+      </button>
+
+      <!-- Pause button - centered, appears on tap -->
+      <button id="pauseBtn" class="pause-video-btn" aria-label="Pause video">
+        <i class="fas fa-pause"></i>
       </button>
     </section>
 
@@ -167,7 +174,7 @@
         <h3>Contact</h3>
         <p>Email: <a href="mailto:chaminvestementsco.ltd@gmail.com">chaminvestementsco.ltd@gmail.com</a></p>
         <p>WhatsApp: <a href="https://wa.me/250794444444" target="_blank">+250 794 444 444</a></p>
-        <p>WhatsApp: <a href="https://wa.me/62858883344" target="_blank">+62 858 888 3344</a></p>
+        <p>Call: <a href="tel:+628588883344">+62 858 888 3344</a></p>
         <p>Call: +250 791 222 222</p>
       </div>
     </div>
@@ -195,6 +202,7 @@
       const video = document.getElementById('heroVideo');
       const muteToggle = document.getElementById('muteToggle');
       const playOverlay = document.getElementById('playOverlay');
+      const pauseBtn = document.getElementById('pauseBtn');
 
       function tryPlayWithSound() {
         if (!video) return;
@@ -270,26 +278,15 @@
       }, { once: true });
     })();
 
-    // VIDEO: Pause button + auto-pause on scroll away
+    // VIDEO: Pause button + auto-pause on scroll away + tap to pause
     (function() {
       const video = document.getElementById('heroVideo');
       const videoSection = document.querySelector('.video-section');
-      if (!video || !videoSection) return;
+      const pauseBtn = document.getElementById('pauseBtn');
+      if (!video || !videoSection || !pauseBtn) return;
 
-      const pauseBtn = document.createElement('button');
-      pauseBtn.className = 'pause-video-btn';
-      pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      pauseBtn.title = 'Pause video';
-      videoSection.appendChild(pauseBtn);
-
-      let hidePauseTimer;
-      function showPauseControl() {
-        pauseBtn.classList.add('visible');
-        clearTimeout(hidePauseTimer);
-        hidePauseTimer = setTimeout(() => pauseBtn.classList.remove('visible'), 3000);
-      }
-
-      pauseBtn.addEventListener('click', () => {
+      // Show pause button on tap
+      videoSection.addEventListener('click', () => {
         if (video.paused) {
           video.play();
           pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
@@ -297,12 +294,11 @@
           video.pause();
           pauseBtn.innerHTML = '<i class="fas fa-play"></i>';
         }
+        pauseBtn.classList.add('visible');
+        setTimeout(() => pauseBtn.classList.remove('visible'), 2000);
       });
 
-      videoSection.addEventListener('mousemove', showPauseControl);
-      videoSection.addEventListener('touchstart', showPauseControl);
-      showPauseControl();
-
+      // Auto-pause when user scrolls past video
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (!entry.isIntersecting && !video.paused) {
@@ -312,6 +308,17 @@
         });
       }, { threshold: 0.1 });
       observer.observe(videoSection);
+
+      // Show pause btn on mouse/touch over video
+      let hidePauseTimer;
+      function showPauseControl() {
+        pauseBtn.classList.add('visible');
+        clearTimeout(hidePauseTimer);
+        hidePauseTimer = setTimeout(() => pauseBtn.classList.remove('visible'), 2000);
+      }
+      videoSection.addEventListener('mousemove', showPauseControl);
+      videoSection.addEventListener('touchstart', showPauseControl);
+      showPauseControl(); // initial show
     })();
 
     // CARDS animation
