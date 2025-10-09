@@ -55,7 +55,7 @@ a{ color:inherit; text-decoration:none; }
   width:auto; 
   border-radius:8px; 
   display:block; 
-  margin-left: 0; /* push logo to far left */
+  margin-left: -rem; /* push logo to far left */
 }
 
 /* nav links */
@@ -101,7 +101,7 @@ a{ color:inherit; text-decoration:none; }
   border:none; 
   flex-direction: column;
   gap: 4px;
-  margin-right: 12px; /* add right margin on mobile */
+  margin-right: 30px; /* add right margin on mobile */
 }
 .hamburger span{ 
   display:block; 
@@ -163,6 +163,17 @@ a{ color:inherit; text-decoration:none; }
   background: rgba(255,255,255,0.2);
 }
 
+/* nav links */
+.nav-right{ display:flex; align-items:center; gap:12px; }
+.nav-links{ display:flex; gap:16px; list-style:none; align-items:center; }
+.nav-links a{ 
+  color:#fff; 
+  font-weight:600; 
+  padding:6px 2px; 
+  position:relative; 
+  transition: color 0.2s ease;
+}
+
 /* ========== HERO / VIDEO ========== */
 .video-section{
   width: 100vw;
@@ -182,8 +193,8 @@ a{ color:inherit; text-decoration:none; }
 
 .video-section video{
   width:100%;
-  height:100%;
-  object-fit: contain; /* NO CROP — shows full frame with black bars if needed */
+  height:80%;
+  object-fit: cover; /* NO CROP — shows full frame with black bars if needed */
   object-position: center center;
   display:block;
   background:#000;
@@ -460,3 +471,4 @@ footer{
   .logo img{ height:40px; }
   .video-section{ height: calc(60vh - 0px); }
 }
+
