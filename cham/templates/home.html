@@ -32,14 +32,12 @@
           <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
         </ul>
 
-        <!-- hamburger for mobile -->
         <button id="hamburger" class="hamburger" aria-label="Open menu" type="button">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
 
-    <!-- mobile menu panel -->
     <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
       <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
@@ -55,19 +53,16 @@
 
     <!-- VIDEO HERO -->
     <section class="video-section" id="hero">
-      <!-- Video: note not muted here; JS will attempt autoplay and fall back to a play button -->
       <video id="heroVideo" playsinline loop preload="metadata">
         <source src="{% static 'images/cattle-video.mp4' %}" type="video/mp4">
         Your browser does not support the video tag.
       </video>
 
-      <!-- Play fallback if autoplay with sound is blocked -->
       <button id="playOverlay" class="play-overlay" aria-hidden="true" title="Play video with sound">
         <i class="fas fa-play"></i>
         <span>Play</span>
       </button>
 
-      <!-- mute/unmute control (bottom-right) -->
       <button id="muteToggle" class="mute-toggle" aria-pressed="false" title="Mute/unmute video">
         <i class="fas fa-volume-up"></i>
       </button>
@@ -79,7 +74,7 @@
       <p>We provide quality from the beginning.</p>
     </div>
 
-    <!-- BENEFITS (cards) -->
+    <!-- BENEFITS -->
     <section class="benefits">
       <div class="container">
         <h2>Why Partner With Us?</h2>
@@ -156,7 +151,6 @@
         <h3>Location</h3>
         <div class="locations-wrap">
           <span class="location-label" id="footerLocationLabel">Hover / Tap to see countries</span>
-
           <div class="locations-list" id="footerLocations" aria-hidden="true">
             <div>Rwanda</div>
             <div>Uganda</div>
@@ -172,7 +166,8 @@
       <div class="footer-col">
         <h3>Contact</h3>
         <p>Email: <a href="mailto:chaminvestementsco.ltd@gmail.com">chaminvestementsco.ltd@gmail.com</a></p>
-        <p>WhatsApp: +250 794 444 444</p>
+        <p>WhatsApp: <a href="https://wa.me/250794444444" target="_blank">+250 794 444 444</a></p>
+        <p>WhatsApp: <a href="https://wa.me/62858883344" target="_blank">+62 858 888 3344</a></p>
         <p>Call: +250 791 222 222</p>
       </div>
     </div>
@@ -182,7 +177,7 @@
     </div>
   </footer>
 
-  <!-- JS: video controls, autoplay fallback, cards animation, mobile behaviors -->
+  <!-- JS -->
   <script>
     // NAV: mobile toggle
     (function() {
@@ -195,28 +190,21 @@
       });
     })();
 
-    // VIDEO: autoplay attempt, play overlay fallback, mute toggle, auto-hide control
+    // VIDEO: autoplay, mute, play overlay
     (function() {
       const video = document.getElementById('heroVideo');
       const muteToggle = document.getElementById('muteToggle');
       const playOverlay = document.getElementById('playOverlay');
 
-      // prefer to start with sound, but browsers often block autoplay with sound.
-      // attempt autoplay with sound; if blocked show play overlay so user can start with sound.
       function tryPlayWithSound() {
         if (!video) return;
-        // ensure loop is set
         video.loop = true;
-        // try to play
         const p = video.play();
         if (p !== undefined) {
           p.then(() => {
-            // autoplay succeeded (sound playing)
             video.muted = false;
             hidePlayOverlay();
           }).catch(() => {
-            // autoplay with sound blocked; show overlay to let user start
-            // set muted to true for now so some browsers will autoplay silently (optional)
             video.muted = true;
             showPlayOverlay();
           });
@@ -224,67 +212,57 @@
       }
 
       function showPlayOverlay() {
-        if (!playOverlay) return;
-        playOverlay.style.display = 'flex';
-        playOverlay.setAttribute('aria-hidden', 'false');
+        if (playOverlay) {
+          playOverlay.style.display = 'flex';
+          playOverlay.setAttribute('aria-hidden', 'false');
+        }
       }
       function hidePlayOverlay() {
-        if (!playOverlay) return;
-        playOverlay.style.display = 'none';
-        playOverlay.setAttribute('aria-hidden', 'true');
+        if (playOverlay) {
+          playOverlay.style.display = 'none';
+          playOverlay.setAttribute('aria-hidden', 'true');
+        }
       }
 
-      // overlay click: play with sound
       playOverlay && playOverlay.addEventListener('click', async () => {
         try {
           video.muted = false;
           await video.play();
           hidePlayOverlay();
         } catch (err) {
-          // if still blocked, unmute after user interacts then play
           video.muted = true;
           await video.play().catch(()=>{});
           hidePlayOverlay();
         }
       });
 
-      // create mute toggle if missing (should exist from template)
-      const muteBtn = document.getElementById('muteToggle');
-      if (muteBtn) {
-        const icon = muteBtn.querySelector('i');
-        // set initial state (video may be muted by autoplay policy)
-        muteBtn.addEventListener('click', () => {
+      if (muteToggle) {
+        const icon = muteToggle.querySelector('i');
+        muteToggle.addEventListener('click', () => {
           video.muted = !video.muted;
-          muteBtn.setAttribute('aria-pressed', String(video.muted));
+          muteToggle.setAttribute('aria-pressed', String(video.muted));
           if (icon) {
-            icon.classList.toggle('fa-volume-mute', video.muted);
-            icon.classList.toggle('fa-volume-up', !video.muted);
+            icon.className = video.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
           }
-          // if user explicitly unmutes, hide overlay and try to play
           if (!video.muted) {
             video.play().catch(()=>{});
             hidePlayOverlay();
           }
         });
 
-        // auto-hide behavior: hide after 3s, reappear on mousemove over video
         let hideTimer;
         function scheduleHide() {
           clearTimeout(hideTimer);
-          muteBtn.classList.add('visible');
-          hideTimer = setTimeout(()=> muteBtn.classList.remove('visible'), 3000);
+          muteToggle.classList.add('visible');
+          hideTimer = setTimeout(()=> muteToggle.classList.remove('visible'), 3000);
         }
-        // show on pointer over video-area
         const videoSection = document.querySelector('.video-section');
         videoSection && videoSection.addEventListener('mousemove', scheduleHide);
         videoSection && videoSection.addEventListener('touchstart', scheduleHide);
-        // initially schedule
         scheduleHide();
       }
 
-      // initial attempt
       tryPlayWithSound();
-      // if user interacts anywhere on page, try again to play with sound
       document.addEventListener('click', () => {
         if (video && video.paused) {
           video.play().catch(()=>{});
@@ -292,12 +270,55 @@
       }, { once: true });
     })();
 
-    // CARDS: alternate left/right slow slide and replay when re-entering viewport
+    // VIDEO: Pause button + auto-pause on scroll away
+    (function() {
+      const video = document.getElementById('heroVideo');
+      const videoSection = document.querySelector('.video-section');
+      if (!video || !videoSection) return;
+
+      const pauseBtn = document.createElement('button');
+      pauseBtn.className = 'pause-video-btn';
+      pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      pauseBtn.title = 'Pause video';
+      videoSection.appendChild(pauseBtn);
+
+      let hidePauseTimer;
+      function showPauseControl() {
+        pauseBtn.classList.add('visible');
+        clearTimeout(hidePauseTimer);
+        hidePauseTimer = setTimeout(() => pauseBtn.classList.remove('visible'), 3000);
+      }
+
+      pauseBtn.addEventListener('click', () => {
+        if (video.paused) {
+          video.play();
+          pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+          video.pause();
+          pauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        }
+      });
+
+      videoSection.addEventListener('mousemove', showPauseControl);
+      videoSection.addEventListener('touchstart', showPauseControl);
+      showPauseControl();
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting && !video.paused) {
+            video.pause();
+            pauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+          }
+        });
+      }, { threshold: 0.1 });
+      observer.observe(videoSection);
+    })();
+
+    // CARDS animation
     (function() {
       const cards = document.querySelectorAll('.benefit-card');
       if (!cards.length) return;
 
-      // set initial classes ensure alternation
       cards.forEach((c, i) => {
         c.classList.remove('show','alt-left','alt-right');
         c.classList.add(i % 2 === 0 ? 'alt-left' : 'alt-right');
@@ -308,10 +329,8 @@
           const el = entry.target;
           const idx = Array.from(cards).indexOf(el);
           if (entry.isIntersecting) {
-            // staggered slow reveal
             setTimeout(() => el.classList.add('show'), idx * 300);
           } else {
-            // remove so it replays on re-enter
             el.classList.remove('show');
           }
         });
@@ -320,34 +339,29 @@
       cards.forEach(c => observer.observe(c));
     })();
 
-    // FOOTER LOCATION: show on hover (desktop) and toggle on click (mobile)
+    // FOOTER LOCATIONS
     (function() {
       const footerLabel = document.getElementById('footerLocationLabel');
       const footerLocations = document.getElementById('footerLocations');
-
-      if (!footerLabel || !footerLocations) return;
-
-      // desktop hover: parent container show on mouseenter/mouseleave
       const parent = footerLabel.closest('.locations-wrap');
-      if (parent) {
-        parent.addEventListener('mouseenter', () => {
-          parent.classList.add('hover');
-          footerLocations.setAttribute('aria-hidden','false');
-        });
-        parent.addEventListener('mouseleave', () => {
-          parent.classList.remove('hover');
-          footerLocations.setAttribute('aria-hidden','true');
-        });
-      }
 
-      // mobile/touch: toggle on tap
+      if (!footerLabel || !footerLocations || !parent) return;
+
+      parent.addEventListener('mouseenter', () => {
+        parent.classList.add('hover');
+        footerLocations.setAttribute('aria-hidden','false');
+      });
+      parent.addEventListener('mouseleave', () => {
+        parent.classList.remove('hover');
+        footerLocations.setAttribute('aria-hidden','true');
+      });
+
       footerLabel.addEventListener('click', (e) => {
         e.preventDefault();
         const isOpen = parent.classList.toggle('hover');
         footerLocations.setAttribute('aria-hidden', String(!isOpen));
       });
 
-      // close when clicking outside (mobile)
       document.addEventListener('click', (e) => {
         if (!parent.contains(e.target)) {
           parent.classList.remove('hover');
