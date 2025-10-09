@@ -1,79 +1,106 @@
-<!DOCTYPE html>
+{% load static %}
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home page</title>
-       {% load static %}
-<link rel="stylesheet" href="{% static 'css/home.css' %}">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Premium Cattle Export | Home</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- main stylesheet -->
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 <body>
-    
 
-  <nav class="glass-navbar">
+  <!-- NAVBAR (fixed) -->
+  <nav class="glass-navbar" id="navbar">
     <div class="nav-container">
-      <!-- Logo Image -->
       <div class="logo">
-           <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+        <a href="{% url 'home' %}">
+          <img src="{% static 'images/logo.png' %}" alt="Company logo">
+        </a>
       </div>
 
-      <!-- Hamburger Menu (Mobile) -->
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <div class="nav-right">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+          <li><a href="{% url 'about' %}" class="nav-link">About</a></li>
+          <li><a href="{% url 'services' %}" class="nav-link">Services</a></li>
+          <li><a href="{% url 'breeds' %}" class="nav-link">Breeds</a></li>
+          <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+        </ul>
 
-      <!-- Navigation Links -->
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#" class="nav-link">Home</a></li>
-        <li><a href="#" class="nav-link">About Us</a></li>
-        <li><a href="#" class="nav-link">Services</a></li>
-        <li><a href="#" class="nav-link">Breeds</a></li>
-        <li><a href="#" class="nav-link">Contact</a></li>
+        <!-- hamburger for mobile -->
+        <button id="hamburger" class="hamburger" aria-label="Open menu" type="button">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- mobile menu panel -->
+    <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'services' %}">Services</a></li>
+        <li><a href="{% url 'breeds' %}">Breeds</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  
- 
+  <main>
 
-  
-
- <main>
     <!-- VIDEO HERO -->
-    <section class="video-section">
-      <video autoplay muted loop playsinline>
+    <section class="video-section" id="hero">
+      <!-- Video: note not muted here; JS will attempt autoplay and fall back to a play button -->
+      <video id="heroVideo" playsinline loop preload="metadata">
         <source src="{% static 'images/cattle-video.mp4' %}" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <div class="video-text">
-        <h1>Exporting Premium Cattle from Africa to the World</h1>
-        <p>We provide quality from the beginning.</p>
-      </div>
+
+      <!-- Play fallback if autoplay with sound is blocked -->
+      <button id="playOverlay" class="play-overlay" aria-hidden="true" title="Play video with sound">
+        <i class="fas fa-play"></i>
+        <span>Play</span>
+      </button>
+
+      <!-- mute/unmute control (bottom-right) -->
+      <button id="muteToggle" class="mute-toggle" aria-pressed="false" title="Mute/unmute video">
+        <i class="fas fa-volume-up"></i>
+      </button>
     </section>
 
-    <!-- BENEFITS -->
+    <!-- Text below the video -->
+    <div class="video-text container">
+      <h1>Exporting Premium Cattle from Africa to the World</h1>
+      <p>We provide quality from the beginning.</p>
+    </div>
+
+    <!-- BENEFITS (cards) -->
     <section class="benefits">
       <div class="container">
         <h2>Why Partner With Us?</h2>
-        <div class="benefits-grid">
-          <div class="benefit-card">
+        <div class="benefits-grid" id="benefitsGrid">
+          <article class="benefit-card alt-left">
             <div class="benefit-icon"><i class="fas fa-cow"></i></div>
             <h3>Extensive Experience</h3>
             <p>Decades of expertise in cattle breeding and export logistics across Africa.</p>
-          </div>
-          <div class="benefit-card">
+          </article>
+
+          <article class="benefit-card alt-right">
             <div class="benefit-icon"><i class="fas fa-award"></i></div>
             <h3>High Quality</h3>
             <p>Only the healthiest, genetically superior cattle meet our strict standards.</p>
-          </div>
-          <div class="benefit-card">
+          </article>
+
+          <article class="benefit-card alt-left">
             <div class="benefit-icon"><i class="fas fa-headset"></i></div>
             <h3>Excellent Service</h3>
             <p>Dedicated support from inquiry to delivery — we’re with you every step.</p>
-          </div>
+          </article>
         </div>
       </div>
     </section>
@@ -83,12 +110,12 @@
       <div class="container">
         <div class="why-content">
           <div class="why-image">
-            <img src="{% static 'images/healthy-cow.jpg' %}" alt="Healthy cattle in green pasture">
+            <img src="{% static 'images/healthy-cow.jpg' %}" alt="Healthy cattle">
           </div>
           <div class="why-text">
             <h2>Why Choose Us?</h2>
             <p>We care about every aspect of cattle farming — from nutrition to health care — to ensure the health and well-being of our cattle. Our farms follow sustainable, ethical practices that prioritize animal welfare and environmental responsibility.</p>
-            <a href="{% url 'about' %}" class="btn">Learn More About Us</a>
+            <a href="{% url 'about' %}" class="btn">Learn More</a>
           </div>
         </div>
       </div>
@@ -107,31 +134,30 @@
     </section>
 
     <!-- FINAL CTA -->
-    <section class="final-cta" id="contact">
-      <div class="container">
-        <h2>Ready to source premium cattle?</h2>
-        <p>Let’s talk about your needs and how we can deliver exceptional livestock to your doorstep.</p>
-        <a href="{% url 'contact' %}" class="btn">Contact Us Today</a>
-      </div>
+    <section class="final-cta container" id="contact">
+      <h2>Ready to source premium cattle?</h2>
+      <p>Let’s talk about your needs and how we can deliver exceptional livestock to your doorstep.</p>
+      <a href="{% url 'contact' %}" class="btn">Contact Us Today</a>
     </section>
+  </main>
 
-    <!-- FOOTER -->
-    <footer>
-      <div class="container footer-row">
-        <div class="footer-col">
-          <h3>Quick Links</h3>
-          <a href="{% url 'home' %}">Home</a>
-          <a href="{% url 'about' %}">About Us</a>
-          <a href="{% url 'services' %}">Services</a>
-          <a href="{% url 'contact' %}">Contact</a>
-        </div>
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-row">
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'about' %}">About Us</a>
+        <a href="{% url 'services' %}">Services</a>
+        <a href="{% url 'contact' %}">Contact</a>
+      </div>
 
-        <div class="footer-col contact">
-          <h3>Contact Us</h3>
-          <p>Email: <a href="mailto:chaminvestementsco.ltd@gmail.com">chaminvestementsco.ltd@gmail.com</a></p>
-          <p>WhatsApp: +250 794 444 444</p>
-          <p>Call: +250 791 222 222 or +62 858 8883 3444</p>
-          <div class="locations-dropdown">
+      <div class="footer-col">
+        <h3>Location</h3>
+        <div class="locations-wrap">
+          <span class="location-label" id="footerLocationLabel">Hover / Tap to see countries</span>
+
+          <div class="locations-list" id="footerLocations" aria-hidden="true">
             <div>Rwanda</div>
             <div>Uganda</div>
             <div>Sudan</div>
@@ -140,58 +166,195 @@
             <div>Malaysia</div>
             <div>Vietnam</div>
           </div>
-          <div class="social-icons">
-            <a href="mailto:chaminvestementsco.ltd@gmail.com"><i class="fas fa-envelope"></i></a>
-            <a href="https://wa.me/250794444444" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="tel:+250791222222"><i class="fas fa-phone"></i></a>
-            <a href="tel:+6285888833444"><i class="fas fa-phone"></i></a>
-          </div>
         </div>
       </div>
-      <p class="copyright">&copy; 2025 Chaminvestements Co. Ltd. All rights reserved.</p>
-    </footer>
-  </main>
 
-  <!-- Animation for cards -->
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <p>Email: <a href="mailto:chaminvestementsco.ltd@gmail.com">chaminvestementsco.ltd@gmail.com</a></p>
+        <p>WhatsApp: +250 794 444 444</p>
+        <p>Call: +250 791 222 222</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <p class="copyright">&copy; 2025 Chaminvestements Co. Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JS: video controls, autoplay fallback, cards animation, mobile behaviors -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cards = document.querySelectorAll('.benefit-card');
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach((entry, index) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add('visible'), index * 200);
+    // NAV: mobile toggle
+    (function() {
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (!hamburger) return;
+      hamburger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('active');
+      });
+    })();
+
+    // VIDEO: autoplay attempt, play overlay fallback, mute toggle, auto-hide control
+    (function() {
+      const video = document.getElementById('heroVideo');
+      const muteToggle = document.getElementById('muteToggle');
+      const playOverlay = document.getElementById('playOverlay');
+
+      // prefer to start with sound, but browsers often block autoplay with sound.
+      // attempt autoplay with sound; if blocked show play overlay so user can start with sound.
+      function tryPlayWithSound() {
+        if (!video) return;
+        // ensure loop is set
+        video.loop = true;
+        // try to play
+        const p = video.play();
+        if (p !== undefined) {
+          p.then(() => {
+            // autoplay succeeded (sound playing)
+            video.muted = false;
+            hidePlayOverlay();
+          }).catch(() => {
+            // autoplay with sound blocked; show overlay to let user start
+            // set muted to true for now so some browsers will autoplay silently (optional)
+            video.muted = true;
+            showPlayOverlay();
+          });
+        }
+      }
+
+      function showPlayOverlay() {
+        if (!playOverlay) return;
+        playOverlay.style.display = 'flex';
+        playOverlay.setAttribute('aria-hidden', 'false');
+      }
+      function hidePlayOverlay() {
+        if (!playOverlay) return;
+        playOverlay.style.display = 'none';
+        playOverlay.setAttribute('aria-hidden', 'true');
+      }
+
+      // overlay click: play with sound
+      playOverlay && playOverlay.addEventListener('click', async () => {
+        try {
+          video.muted = false;
+          await video.play();
+          hidePlayOverlay();
+        } catch (err) {
+          // if still blocked, unmute after user interacts then play
+          video.muted = true;
+          await video.play().catch(()=>{});
+          hidePlayOverlay();
+        }
+      });
+
+      // create mute toggle if missing (should exist from template)
+      const muteBtn = document.getElementById('muteToggle');
+      if (muteBtn) {
+        const icon = muteBtn.querySelector('i');
+        // set initial state (video may be muted by autoplay policy)
+        muteBtn.addEventListener('click', () => {
+          video.muted = !video.muted;
+          muteBtn.setAttribute('aria-pressed', String(video.muted));
+          if (icon) {
+            icon.classList.toggle('fa-volume-mute', video.muted);
+            icon.classList.toggle('fa-volume-up', !video.muted);
+          }
+          // if user explicitly unmutes, hide overlay and try to play
+          if (!video.muted) {
+            video.play().catch(()=>{});
+            hidePlayOverlay();
           }
         });
-      }, { threshold: 0.2 });
 
-      cards.forEach(card => observer.observe(card));
-    });
-  </script>
+        // auto-hide behavior: hide after 3s, reappear on mousemove over video
+        let hideTimer;
+        function scheduleHide() {
+          clearTimeout(hideTimer);
+          muteBtn.classList.add('visible');
+          hideTimer = setTimeout(()=> muteBtn.classList.remove('visible'), 3000);
+        }
+        // show on pointer over video-area
+        const videoSection = document.querySelector('.video-section');
+        videoSection && videoSection.addEventListener('mousemove', scheduleHide);
+        videoSection && videoSection.addEventListener('touchstart', scheduleHide);
+        // initially schedule
+        scheduleHide();
+      }
 
+      // initial attempt
+      tryPlayWithSound();
+      // if user interacts anywhere on page, try again to play with sound
+      document.addEventListener('click', () => {
+        if (video && video.paused) {
+          video.play().catch(()=>{});
+        }
+      }, { once: true });
+    })();
 
+    // CARDS: alternate left/right slow slide and replay when re-entering viewport
+    (function() {
+      const cards = document.querySelectorAll('.benefit-card');
+      if (!cards.length) return;
 
-
-
-
-
-  <script>
-    // Toggle mobile menu
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('nav-links');
-
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-      hamburger.classList.toggle('active');
-    });
-
-    // Add active class to clicked link (for underline effect)
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', function() {
-        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-        this.classList.add('active');
+      // set initial classes ensure alternation
+      cards.forEach((c, i) => {
+        c.classList.remove('show','alt-left','alt-right');
+        c.classList.add(i % 2 === 0 ? 'alt-left' : 'alt-right');
       });
-    });
-  </script>
 
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const el = entry.target;
+          const idx = Array.from(cards).indexOf(el);
+          if (entry.isIntersecting) {
+            // staggered slow reveal
+            setTimeout(() => el.classList.add('show'), idx * 300);
+          } else {
+            // remove so it replays on re-enter
+            el.classList.remove('show');
+          }
+        });
+      }, { threshold: 0.25 });
+
+      cards.forEach(c => observer.observe(c));
+    })();
+
+    // FOOTER LOCATION: show on hover (desktop) and toggle on click (mobile)
+    (function() {
+      const footerLabel = document.getElementById('footerLocationLabel');
+      const footerLocations = document.getElementById('footerLocations');
+
+      if (!footerLabel || !footerLocations) return;
+
+      // desktop hover: parent container show on mouseenter/mouseleave
+      const parent = footerLabel.closest('.locations-wrap');
+      if (parent) {
+        parent.addEventListener('mouseenter', () => {
+          parent.classList.add('hover');
+          footerLocations.setAttribute('aria-hidden','false');
+        });
+        parent.addEventListener('mouseleave', () => {
+          parent.classList.remove('hover');
+          footerLocations.setAttribute('aria-hidden','true');
+        });
+      }
+
+      // mobile/touch: toggle on tap
+      footerLabel.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpen = parent.classList.toggle('hover');
+        footerLocations.setAttribute('aria-hidden', String(!isOpen));
+      });
+
+      // close when clicking outside (mobile)
+      document.addEventListener('click', (e) => {
+        if (!parent.contains(e.target)) {
+          parent.classList.remove('hover');
+          footerLocations.setAttribute('aria-hidden','true');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
