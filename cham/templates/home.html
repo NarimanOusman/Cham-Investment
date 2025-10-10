@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Premium Cattle Export | Home</title>
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <!-- main stylesheet -->
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 <body>
@@ -41,18 +41,17 @@
 
     <!-- Mobile menu slides in from right -->
     <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
-      <ul class="nav-links" id="navLinks">
-          <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
-          <li><a href="{% url 'about' %}" class="nav-link">About</a></li>
-          <li><a href="{% url 'services' %}" class="nav-link">Services</a></li>
-          <li><a href="{% url 'breeds' %}" class="nav-link">Breeds</a></li>
-          <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
-        </ul>
+      <ul class="nav-links">
+        <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+        <li><a href="{% url 'about' %}" class="nav-link">About</a></li>
+        <li><a href="{% url 'services' %}" class="nav-link">Services</a></li>
+        <li><a href="{% url 'breeds' %}" class="nav-link">Breeds</a></li>
+        <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+      </ul>
     </div>
   </nav>
 
-  <main style="margin: 0; padding: 0;">
-
+  <main>
     <!-- VIDEO HERO -->
     <section class="video-section" id="hero">
       <video id="heroVideo" playsinline loop preload="metadata">
@@ -69,7 +68,6 @@
         <i class="fas fa-volume-up"></i>
       </button>
 
-      <!-- Pause button - centered, appears on tap -->
       <button id="pauseBtn" class="pause-video-btn" aria-label="Pause video">
         <i class="fas fa-pause"></i>
       </button>
@@ -77,7 +75,7 @@
 
     <!-- Text below the video -->
     <div class="video-text container">
-      <h1 >Exporting Premium Cattle from Africa to the World</h1>
+      <h1>Exporting Premium Cattle from Africa to the World</h1>
       <p>We provide quality from the beginning.</p>
     </div>
 
@@ -137,7 +135,7 @@
 
     <!-- FINAL CTA -->
     <section class="final-cta container" id="contact">
-      <h2  class="htwo">Ready to source premium cattle?</h2>
+      <h2 class="htwo">Ready to source premium cattle?</h2>
       <p>Let’s talk about your needs and how we can deliver exceptional livestock to your doorstep.</p>
       <a href="{% url 'contact' %}" class="btn">Contact Us Today</a>
     </section>
@@ -285,7 +283,6 @@
       const pauseBtn = document.getElementById('pauseBtn');
       if (!video || !videoSection || !pauseBtn) return;
 
-      // Show pause button on tap
       videoSection.addEventListener('click', () => {
         if (video.paused) {
           video.play();
@@ -298,7 +295,6 @@
         setTimeout(() => pauseBtn.classList.remove('visible'), 2000);
       });
 
-      // Auto-pause when user scrolls past video
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (!entry.isIntersecting && !video.paused) {
@@ -309,7 +305,6 @@
       }, { threshold: 0.1 });
       observer.observe(videoSection);
 
-      // Show pause btn on mouse/touch over video
       let hidePauseTimer;
       function showPauseControl() {
         pauseBtn.classList.add('visible');
@@ -318,7 +313,7 @@
       }
       videoSection.addEventListener('mousemove', showPauseControl);
       videoSection.addEventListener('touchstart', showPauseControl);
-      showPauseControl(); // initial show
+      showPauseControl();
     })();
 
     // CARDS animation
@@ -377,7 +372,7 @@
       });
     })();
 
-    // NAV LINKS: Add active class on tap (mobile) to show underline
+    // NAV LINKS: Add active class on tap
     (function() {
       const navLinks = document.querySelectorAll('.nav-links a');
       navLinks.forEach(link => {
