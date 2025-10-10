@@ -142,45 +142,49 @@
   </main>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="container footer-row">
-      <div class="footer-col">
-        <h3>Quick Links</h3>
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'about' %}">About Us</a>
-        <a href="{% url 'services' %}">Services</a>
-        <a href="{% url 'contact' %}">Contact</a>
-      </div>
+<footer class="modern-footer">
+  <div class="footer-container">
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+        <li><a href="{% url 'services' %}">Services</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+    </div>
 
-      <div class="footer-col">
-        <h3>Location</h3>
-        <div class="locations-wrap">
-          <span class="location-label" id="footerLocationLabel">Hover / Tap to see countries</span>
-          <div class="locations-list" id="footerLocations" aria-hidden="true">
-            <div>Rwanda</div>
-            <div>Uganda</div>
-            <div>Sudan</div>
-            <div>Kenya</div>
-            <div>Indonesia</div>
-            <div>Malaysia</div>
-            <div>Vietnam</div>
-          </div>
+    <div class="footer-col">
+      <h4>Location</h4>
+      <div class="locations-wrap">
+        <span class="location-label" id="footerLocationLabel">Hover / Tap to see countries</span>
+        <div class="locations-list" id="footerLocations" aria-hidden="true">
+          <div>Rwanda</div>
+          <div>Uganda</div>
+          <div>Sudan</div>
+          <div>Kenya</div>
+          <div>Indonesia</div>
+          <div>Malaysia</div>
+          <div>Vietnam</div>
         </div>
       </div>
+    </div>
 
-      <div class="footer-col">
-        <h3>Contact</h3>
-        <p>Email: <a href="mailto:chaminvestementsco.ltd@gmail.com">chaminvestementsco.ltd@gmail.com</a></p>
-        <p>WhatsApp: <a href="https://wa.me/250794444444" target="_blank">+250 794 444 444</a></p>
-        <p>Call: <a href="tel:+628588883344">+62 858 888 3344</a></p>
-        <p>Call: +250 791 222 222</p>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <div class="contact-info">
+        <p><i class="fas fa-envelope"></i> <a href="mailto:chaminvestementsco.ltd@gmail.com">chaminvestementsco.ltd@gmail.com</a></p>
+        <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/250794444444" target="_blank">+250 794 444 444</a></p>
+        <p><i class="fas fa-phone"></i> <a href="tel:+628588883344">+62 858 888 3344</a></p>
+        <p><i class="fas fa-phone"></i> <a href="tel:+250791222222">+250 791 222 222</a></p>
       </div>
     </div>
+  </div>
 
-    <div class="container">
-      <p class="copyright">&copy; 2025 Chaminvestements Co. Ltd. All rights reserved.</p>
-    </div>
-  </footer>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Cham Investment Co. Ltd. All rights reserved.</p>
+  </div>
+</footer>
 
   <!-- JS -->
   <script>
