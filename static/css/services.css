@@ -51,7 +51,7 @@ section {
     font-weight: 700;
     text-align: center;
     margin-bottom: 30px;
-    color: var(--primary);
+    color: #1a5276;
     position: relative;
 }
 
@@ -84,7 +84,7 @@ section {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     text-align: center;
-    padding: 30px 0; /* Reduced from 40px */
+    padding: 30px 0;
 }
 
 .hero-text {
@@ -118,24 +118,24 @@ section {
     position: relative;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    padding: 15px; /* Added padding around carousel */
+    padding: 15px;
 }
 
 .carousel-track {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    padding: 10px 0; /* Vertical padding */
-    gap: 10px; /* Horizontal spacing between images */
+    padding: 10px 0;
+    gap: 10px;
 }
 
 .carousel-image {
     width: 100%;
-    height: auto; /* Let height adjust naturally */
+    height: auto;
     object-fit: cover;
     flex-shrink: 0;
     border-radius: 10px;
-    max-height: 300px; /* Limit height on large screens */
-    min-height: 150px; /* Minimum height for small screens */
+    max-height: 300px;
+    min-height: 150px;
 }
 
 /* Services Grid */
@@ -272,7 +272,7 @@ section {
     align-items: flex-start;
     gap: 20px;
     transition: var(--transition);
-    transform: translateX(100px); /* Slide from right */
+    transform: translateX(100px);
     opacity: 0;
 }
 
@@ -518,6 +518,7 @@ footer {
 @media (max-width: 768px) {
     .section-title {
         font-size: 2rem;
+         margin-top: 10px;
     }
 
     .services-grid {
@@ -579,7 +580,6 @@ footer {
         margin: 5px 0;
     }
 
-    /* Reduce hero section further on mobile */
     .hero-section {
         padding: 20px 0;
     }
@@ -595,6 +595,7 @@ footer {
 
     .service-title {
         font-size: 1.2rem;
+       
     }
 
     .service-description {
@@ -606,7 +607,6 @@ footer {
         font-size: 0.85rem;
     }
 
-    /* Adjust carousel padding on mobile */
     .image-carousel {
         padding: 10px;
     }
@@ -696,11 +696,13 @@ img.loaded {
 
 .logo img {
     height: 40px;
-    filter: none; /* Removed drop-shadow to fix visibility */
+    filter: none;
     display: block;
     border: none;
     max-height: 40px;
     width: auto;
+    object-fit: contain;
+    object-position: left;
 }
 
 .nav-links {
@@ -783,24 +785,70 @@ img.loaded {
     font-size: 1.1rem;
 }
 
-/* Desktop-specific fixes for logo and carousel */
+/* === CRITICAL FIX: LOGO VISIBLE ON ALL SCREEN SIZES === */
 @media (min-width: 769px) {
     .glass-navbar {
         background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: none; /* Remove blur on desktop to fix logo visibility */
+        backdrop-filter: none;
         -webkit-backdrop-filter: none;
     }
 
     .nav-logo {
-        height: 40px;
-        width: auto;
-        max-height: 40px;
+        height: 40px !important;
+        width: auto !important;
+        max-height: 40px !important;
         filter: none !important;
+        object-fit: contain !important;
+        object-position: left !important;
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
     }
 
-    .carousel-image {
-        height: auto;
-        max-height: 350px;
-        min-height: 200px;
+    .logo img {
+        height: 40px !important;
+        width: auto !important;
+        max-height: 40px !important;
+        filter: none !important;
+        object-fit: contain !important;
+        object-position: left !important;
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Ensure logo doesn't get cut off */
+    .nav-container {
+        height: 60px;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    .logo {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+/* Additional fix for very large screens */
+@media (min-width: 1024px) {
+    .nav-logo {
+        height: 40px !important;
+        width: auto !important;
+        max-height: 40px !important;
+        filter: none !important;
+        object-fit: contain !important;
+        object-position: left !important;
+        display: block !important;
+    }
+
+    .logo img {
+        height: 40px !important;
+        width: auto !important;
+        max-height: 40px !important;
+        filter: none !important;
+        object-fit: contain !important;
+        object-position: left !important;
+        display: block !important;
     }
 }
