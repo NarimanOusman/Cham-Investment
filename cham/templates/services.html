@@ -324,11 +324,13 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Ensure logo is always visible
+      // Ensure logo is always visible on desktop
       const navLogo = document.querySelector('.nav-logo');
       if (navLogo) {
-        navLogo.style.filter = 'none'; // Remove any filter that may hide it
-        navLogo.style.opacity = '1';
+        navLogo.style.filter = 'none';
+        navLogo.style.maxHeight = 'auto';
+        navLogo.style.height = 'auto';
+        navLogo.style.width = 'auto';
       }
 
       // Intersection Observer for scroll animations (trigger on every scroll)

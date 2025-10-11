@@ -129,12 +129,13 @@ section {
 }
 
 .carousel-image {
-    width: calc(100% - 20px); /* Account for padding */
-    height: 250px;
+    width: 100%;
+    height: auto; /* Let height adjust naturally */
     object-fit: cover;
     flex-shrink: 0;
     border-radius: 10px;
-    margin: 0; /* Remove margin */
+    max-height: 300px; /* Limit height on large screens */
+    min-height: 150px; /* Minimum height for small screens */
 }
 
 /* Services Grid */
@@ -698,6 +699,8 @@ img.loaded {
     filter: none; /* Removed drop-shadow to fix visibility */
     display: block;
     border: none;
+    max-height: 40px;
+    width: auto;
 }
 
 .nav-links {
@@ -780,20 +783,24 @@ img.loaded {
     font-size: 1.1rem;
 }
 
-@media (max-width: 768px) {
+/* Desktop-specific fixes for logo and carousel */
+@media (min-width: 769px) {
     .glass-navbar {
         background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: none; /* Remove blur on desktop to fix logo visibility */
+        -webkit-backdrop-filter: none;
     }
 
-    .nav-links {
-        display: none;
+    .nav-logo {
+        height: 40px;
+        width: auto;
+        max-height: 40px;
+        filter: none !important;
     }
 
-    .hamburger {
-        display: flex;
-    }
-
-    .mobile-menu {
-        padding: 80px 20px 20px;
+    .carousel-image {
+        height: auto;
+        max-height: 350px;
+        min-height: 200px;
     }
 }
