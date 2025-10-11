@@ -10,7 +10,7 @@
 </head>
 <body>
 
- <!-- NAVBAR (fixed on all devices) -->
+  <!-- NAVBAR (fixed on all devices) -->
   <nav class="glass-navbar" id="navbar">
     <div class="nav-container">
       <div class="logo">
@@ -47,12 +47,11 @@
     </div>
   </nav>
 
-
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="container">
       <h1 class="section-title">CHAM INVESTMENT</h1>
-       <!-- Image Carousel AFTER the paragraph -->
+      <!-- Image Carousel AFTER the paragraph -->
       <div class="image-carousel">
         <div class="carousel-track">
           <img src="{% static 'images/meat-storage.jpg' %}" alt="Cows in barn" class="carousel-image">
@@ -66,7 +65,6 @@
       <p class="hero-text">
         Exporting all types of live and frozen cows and calves. We work with Sudanese, African, Holstein and Simmental calves for milk production.
       </p>
-     
       <div class="hero-features">
         <div class="feature-card">
           <h3>Extensive experience</h3>
@@ -85,7 +83,6 @@
   <section id="live-cattle" class="section-light">
     <div class="container">
       <h2 class="section-title">Live Cattle Export</h2>
-
       <!-- Service Cards -->
       <div class="services-grid">
         <div class="service-card">
@@ -293,7 +290,6 @@
             <div class="contact-icon">📞</div>
             <span>+250791222222</span>
           </div>
-          
         </div>
         <div class="contact-buttons">
           <a href="mailto:chaminvestementsco.ltd@gmail.com" class="btn">Send Email</a>
@@ -441,6 +437,9 @@
       setTimeout(() => {
         serviceCards.forEach((card, index) => {
           card.classList.add('visible');
+        });
+        stepElements.forEach((step, index) => {
+          step.classList.add('visible');
         });
       }, 500);
     });
