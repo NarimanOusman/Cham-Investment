@@ -15,9 +15,21 @@
 }
 
 /* ---------- RESET ---------- */
-*{ box-sizing: border-box; margin:0; padding:0; }
-html,body{ height:100%; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
 body{
+  padding: 0;
+  margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color:var(--text-dark);
   background-color:#fafafa;

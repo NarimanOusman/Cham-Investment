@@ -84,7 +84,7 @@ section {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     text-align: center;
-    padding: 40px 0;
+    padding: 30px 0; /* Reduced from 40px */
 }
 
 .hero-text {
@@ -118,13 +118,14 @@ section {
     position: relative;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    padding: 0 10px; /* Added horizontal padding */
+    padding: 15px; /* Added padding around carousel */
 }
 
 .carousel-track {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    padding: 10px 0; /* Added vertical padding */
+    padding: 10px 0; /* Vertical padding */
+    gap: 10px; /* Horizontal spacing between images */
 }
 
 .carousel-image {
@@ -132,8 +133,8 @@ section {
     height: 250px;
     object-fit: cover;
     flex-shrink: 0;
-    margin: 0 10px; /* Add spacing between images */
     border-radius: 10px;
+    margin: 0; /* Remove margin */
 }
 
 /* Services Grid */
@@ -579,7 +580,7 @@ footer {
 
     /* Reduce hero section further on mobile */
     .hero-section {
-        padding: 20px 0; /* Reduced from 30px */
+        padding: 20px 0;
     }
 
     .hero-text {
@@ -606,17 +607,17 @@ footer {
 
     /* Adjust carousel padding on mobile */
     .image-carousel {
-        padding: 0 5px;
+        padding: 10px;
     }
 
     .carousel-track {
         padding: 5px 0;
+        gap: 5px;
     }
 
     .carousel-image {
         width: calc(100% - 10px);
         height: 180px;
-        margin: 0 5px;
     }
 }
 
@@ -694,8 +695,9 @@ img.loaded {
 
 .logo img {
     height: 40px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-    display: block; /* Ensure proper display */
+    filter: none; /* Removed drop-shadow to fix visibility */
+    display: block;
+    border: none;
 }
 
 .nav-links {

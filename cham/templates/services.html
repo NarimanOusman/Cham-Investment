@@ -15,7 +15,7 @@
     <div class="nav-container">
       <div class="logo">
         <a href="{% url 'home' %}">
-          <img src="{% static 'images/logo.png' %}" alt="Company logo">
+          <img src="{% static 'images/logo.png' %}" alt="Company logo" class="nav-logo">
         </a>
       </div>
 
@@ -324,7 +324,14 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Intersection Observer for scroll animations
+      // Ensure logo is always visible
+      const navLogo = document.querySelector('.nav-logo');
+      if (navLogo) {
+        navLogo.style.filter = 'none'; // Remove any filter that may hide it
+        navLogo.style.opacity = '1';
+      }
+
+      // Intersection Observer for scroll animations (trigger on every scroll)
       const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -338,6 +345,8 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+          } else {
+            entry.target.classList.remove('visible'); // Reset on scroll out
           }
         });
       }, observerOptions);
@@ -346,6 +355,8 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+          } else {
+            entry.target.classList.remove('visible'); // Reset on scroll out
           }
         });
       }, observerOptions);
