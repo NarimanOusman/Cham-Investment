@@ -69,7 +69,7 @@ section {
 @media (max-width: 768px) {
     .section-title {
         font-size: 2rem;
-        margin-top: 0; /* Remove negative margin on mobile */
+        margin-top: 4rem; /* Remove negative margin on mobile */
         margin-bottom: 20px;
     }
 }
