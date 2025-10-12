@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Premium Cattle Export{% endblock %}</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Shared CSS (navbar, footer, global styles) -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+  <!-- Page-specific CSS (e.g., home.css, about.css) -->
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="glass-navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="{% url 'home' %}">
+          <img src="{% static 'images/logo.png' %}" alt="Company logo">
+        </a>
+      </div>
+
+      <div class="nav-right">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+          <li><a href="{% url 'about' %}" class="nav-link">About</a></li>
+          <li><a href="{% url 'services' %}" class="nav-link">Services</a></li>
+          <li><a href="{% url 'breeds' %}" class="nav-link">Breeds</a></li>
+          <li><a href="{% url 'home' %}#contact" class="nav-link">Contact</a></li>
+        </ul>
+
+        <button id="hamburger" class="hamburger" aria-label="Open menu" type="button">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
+      <ul class="nav-links">
+        <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+        <li><a href="{% url 'about' %}" class="nav-link">About</a></li>
+        <li><a href="{% url 'services' %}" class="nav-link">Services</a></li>
+        <li><a href="{% url 'breeds' %}" class="nav-link">Breeds</a></li>
+        <li><a href="{% url 'home' %}#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE-SPECIFIC CONTENT -->
+  {% block content %}
+  {% endblock %}
+
+  <!-- Shared JavaScript (navbar, mobile menu) -->
+  <script>
+    // NAV: mobile toggle
+    (function() {
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (!hamburger || !mobileMenu) return;
+      hamburger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('active');
+      });
+    })();
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.remove('open');
+        document.getElementById('hamburger').classList.remove('active');
+      });
+    });
+  </script>
+
+  <!-- Page-specific JavaScript -->
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

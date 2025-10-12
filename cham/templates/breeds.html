@@ -1,0 +1,260 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Breeds{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/breeds.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main style="margin-top: 10px;">
+  <header class="site-header">
+    <div class="container">
+      <h1 class="btitle">Cham Investment</h1>
+      <p class="subtitle">Premium Sudanese, African, Holstein & Simmental cattle for export — optimized for milk and meat production.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Filters -->
+    <div class="filter-bar">
+      <select id="breed-type">
+        <option value="">All Breeds</option>
+        <option value="sudanese">Sudanese</option>
+        <option value="african">African Indigenous</option>
+        <option value="holstein">Holstein</option>
+        <option value="simmental">Simmental</option>
+      </select>
+
+      <select id="climate-fit">
+        <option value="">All Climates</option>
+        <option value="hot">Hot & Arid</option>
+        <option value="tropical">Tropical</option>
+        <option value="temperate">Temperate</option>
+      </select>
+
+      <button id="reset-filters" class="btn-outline">Reset</button>
+    </div>
+
+    <!-- View Toggle -->
+    <div class="view-toggle">
+      <button id="grid-view-btn" class="btn active">Grid</button>
+      <button id="list-view-btn" class="btn">List</button>
+    </div>
+
+    <!-- Grid View -->
+    <div id="breed-grid" class="breed-grid"></div>
+
+    <!-- List View -->
+    <table id="breed-list" class="breed-table hidden">
+      <thead>
+        <tr>
+          <th>Breed</th>
+          <th>Origin</th>
+          <th>Climate Fit</th>
+          <th>Milk Yield</th>
+          <th>Meat Quality</th>
+          <th>Key Strength</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="breed-table-body"></tbody>
+    </table>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p>Email: chaminvestementsco.ltd@gmail.com</p>
+      <p>Phone: +250 794 444 444</p>
+      <p>Location: Rwanda</p>
+    </div>
+  </footer>
+  </main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // ✅ Define STATIC_URL for Django static files
+  const STATIC_URL = "{% static '' %}";
+
+  // Breed data for Cham Investment — using YOUR local images
+  const BREEDS = [
+    {
+      name: "Sudanese",
+      type: "sudanese",
+      origin: "Sudan, East Africa",
+      climate: ["hot", "tropical"],
+      milk: "8–12 L/day",
+      meat: "Good",
+      strength: "Exceptional heat and drought tolerance",
+      traits: [
+        "Hardy in arid and semi-arid regions",
+        "Reliable milk production in hot climates",
+        "Low maintenance, high resilience"
+      ],
+      image: STATIC_URL + "images/sudanese.png"
+    },
+    {
+      name: "African Indigenous",
+      type: "african",
+      origin: "Sub-Saharan Africa",
+      climate: ["hot", "tropical"],
+      milk: "4–6 L/day",
+      meat: "Moderate",
+      strength: "Natural disease resistance",
+      traits: [
+        "Highly resistant to tropical diseases",
+        "Thrives on native forage with minimal inputs",
+        "Ideal for sustainable, low-cost farming"
+      ],
+      image: STATIC_URL + "images/african_indegenous.jpg"
+    },
+    {
+      name: "Holstein",
+      type: "holstein",
+      origin: "Europe, Global",
+      climate: ["temperate", "hot"],
+      milk: "30 L/day",
+      meat: "Fair",
+      strength: "World’s highest milk yield",
+      traits: [
+        "Premium milk volume for commercial dairies",
+        "Adaptable to managed hot climates",
+        "Global standard for dairy efficiency"
+      ],
+      image: STATIC_URL + "images/holstein.webp"
+    },
+    {
+      name: "Simmental",
+      type: "simmental",
+      origin: "Switzerland, Global",
+      climate: ["temperate", "cold"],
+      milk: "15 L/day",
+      meat: "Excellent",
+      strength: "Superior dual-purpose performance",
+      traits: [
+        "High-quality beef with good marbling",
+        "Strong milk production for a beef breed",
+        "Rapid growth and feed efficiency"
+      ],
+      image: STATIC_URL + "images/simmental.webp"
+    }
+  ];
+
+  // DOM Elements
+  const breedGrid = document.getElementById('breed-grid');
+  const tableBody = document.getElementById('breed-table-body');
+  const breedTypeFilter = document.getElementById('breed-type');
+  const climateFilter = document.getElementById('climate-fit');
+  const resetBtn = document.getElementById('reset-filters');
+  const gridViewBtn = document.getElementById('grid-view-btn');
+  const listViewBtn = document.getElementById('list-view-btn');
+  const gridContainer = document.getElementById('breed-grid');
+  const listContainer = document.getElementById('breed-list');
+
+  // 🟢 WhatsApp Inquiry Handler — FIXED (no extra spaces!)
+  function handleInquiry(breedName) {
+    const message = `Hello Cham Investment,\n\nI am interested in exporting ${breedName} cattle for milk and meat production.\n\nPlease share:\n- Current availability\n- Price per head (FOB Rwanda)\n- Health & vaccination records\n- Export documentation process\n- Estimated shipping timeline\n\nThank you!`;
+    const phoneNumber = '250794444444'; // WhatsApp number WITHOUT + or spaces
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  }
+
+  // Render breeds
+  function renderBreeds() {
+    const selectedBreed = breedTypeFilter.value;
+    const selectedClimate = climateFilter.value;
+
+    const filtered = BREEDS.filter(breed => {
+      return (
+        (!selectedBreed || breed.type === selectedBreed) &&
+        (!selectedClimate || breed.climate.includes(selectedClimate))
+      );
+    });
+
+    breedGrid.innerHTML = '';
+    tableBody.innerHTML = '';
+
+    if (filtered.length === 0) {
+      breedGrid.innerHTML = '<p class="no-results">No breeds match your filters.</p>';
+      return;
+    }
+
+    filtered.forEach(breed => {
+      const card = document.createElement('div');
+      card.className = 'breed-card';
+      card.innerHTML = `
+        <div class="card-image">
+          <img src="${breed.image}" alt="${breed.name} cow" loading="lazy">
+        </div>
+        <div class="card-content">
+          <h3>${breed.name}</h3>
+          <p class="origin">${breed.origin}</p>
+          <ul class="traits">
+            ${breed.traits.map(t => `<li>${t}</li>`).join('')}
+          </ul>
+          <div class="stats">
+            <span>Milk: ${breed.milk}</span>
+            <span>Meat: ${breed.meat}</span>
+          </div>
+          <button class="btn-primary" onclick="handleInquiry('${breed.name}')">
+            Chat on WhatsApp
+          </button>
+        </div>
+      `;
+      breedGrid.appendChild(card);
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td data-label="Breed"><strong>${breed.name}</strong><br><small>${breed.origin}</small></td>
+        <td data-label="Origin">${breed.origin}</td>
+        <td data-label="Climate">${breed.climate.map(c => 
+          ({hot: 'Hot', tropical: 'Tropical', temperate: 'Temperate'})[c]
+        ).join(', ')}</td>
+        <td data-label="Milk Yield">${breed.milk}</td>
+        <td data-label="Meat Quality">${breed.meat}</td>
+        <td data-label="Key Strength">${breed.strength}</td>
+        <td data-label="Action"><button class="btn" onclick="handleInquiry('${breed.name}')">WhatsApp</button></td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
+
+  // View switching
+  function switchToGrid() {
+    gridContainer.classList.remove('hidden');
+    listContainer.classList.add('hidden');
+    gridViewBtn.classList.add('active');
+    listViewBtn.classList.remove('active');
+  }
+
+  function switchToList() {
+    gridContainer.classList.add('hidden');
+    listContainer.classList.remove('hidden');
+    listViewBtn.classList.add('active');
+    gridViewBtn.classList.remove('active');
+  }
+
+  // Reset filters
+  function resetFilters() {
+    breedTypeFilter.value = '';
+    climateFilter.value = '';
+    renderBreeds();
+  }
+
+  // Event Listeners
+  breedTypeFilter.addEventListener('change', renderBreeds);
+  climateFilter.addEventListener('change', renderBreeds);
+  resetBtn.addEventListener('click', resetFilters);
+  gridViewBtn.addEventListener('click', switchToGrid);
+  listViewBtn.addEventListener('click', switchToList);
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    renderBreeds();
+  });
+</script>
+{% endblock %}

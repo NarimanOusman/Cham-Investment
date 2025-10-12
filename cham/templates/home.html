@@ -1,150 +1,97 @@
+{% extends 'base.html' %}
+
 {% load static %}
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Premium Cattle Export | Home</title>
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+{% block title %}Premium Cattle Export | Home{% endblock %}
 
-  <!-- Main stylesheet -->
+{% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    <link rel="stylesheet" href="{% static 'css/services.css' %}">
-     <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
 
-</head>
-<body>
+{% block content %}
+<main>
+  <!-- VIDEO HERO -->
+  <section class="video-section" id="hero">
+    <video id="heroVideo" autoplay muted playsinline loop preload="auto">
+      <source src="{% static 'images/cattle-video.mp4' %}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
 
-  <!-- NAVBAR (fixed on all devices) -->
-  <nav class="glass-navbar" id="navbar">
-    <div class="nav-container">
-      <div class="logo">
-        <a href="{% url 'home' %}">
-          <img src="{% static 'images/logo.png' %}" alt="Company logo">
-        </a>
-      </div>
+    <button id="playOverlay" class="play-overlay" aria-hidden="true" title="Play video with sound">
+      <i class="fas fa-play"></i>
+      <span>Play</span>
+    </button>
 
-      <div class="nav-right">
-        <ul class="nav-links" id="navLinks">
-          <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
-          <li><a href="{% url 'about' %}" class="nav-link">About</a></li>
-          <li><a href="{% url 'services' %}" class="nav-link">Services</a></li>
-          <li><a href="{% url 'breeds' %}" class="nav-link">Breeds</a></li>
-          <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
-        </ul>
+    <button id="muteToggle" class="mute-toggle" aria-pressed="true" title="Mute/unmute video">
+      <i class="fas fa-volume-mute"></i>
+    </button>
 
-        <!-- Hamburger: 3-line bar -->
-        <button id="hamburger" class="hamburger" aria-label="Open menu" type="button">
-          <span></span><span></span><span></span>
-        </button>
+    <button id="pauseBtn" class="pause-video-btn" aria-label="Pause video">
+      <i class="fas fa-pause"></i>
+    </button>
+  </section>
+
+  <div class="video-text container">
+    <h1>Exporting Premium Cattle from Africa to the World</h1>
+    <p>We provide quality from the beginning.</p>
+  </div>
+
+  <section class="benefits">
+    <div class="container">
+      <h2>Why Partner With Us?</h2>
+      <div class="benefits-grid" id="benefitsGrid">
+        <article class="benefit-card alt-left">
+          <div class="benefit-icon"><i class="fas fa-cow"></i></div>
+          <h3>Extensive Experience</h3>
+          <p>Decades of expertise in cattle breeding and export logistics across Africa.</p>
+        </article>
+        <article class="benefit-card alt-right">
+          <div class="benefit-icon"><i class="fas fa-award"></i></div>
+          <h3>High Quality</h3>
+          <p>Only the healthiest, genetically superior cattle meet our strict standards.</p>
+        </article>
+        <article class="benefit-card alt-left">
+          <div class="benefit-icon"><i class="fas fa-headset"></i></div>
+          <h3>Excellent Service</h3>
+          <p>Dedicated support from inquiry to delivery — we’re with you every step.</p>
+        </article>
       </div>
     </div>
+  </section>
 
-    <!-- Mobile menu slides in from right -->
-    <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
-      <ul class="nav-links">
-        <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
-        <li><a href="{% url 'about' %}" class="nav-link">About</a></li>
-        <li><a href="{% url 'services' %}" class="nav-link">Services</a></li>
-        <li><a href="{% url 'breeds' %}" class="nav-link">Breeds</a></li>
-        <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
-      </ul>
+  <section class="why-choose">
+    <div class="container">
+      <div class="why-content">
+        <div class="why-image">
+          <img src="{% static 'images/doc.jpg' %}" alt="Healthy cattle">
+        </div>
+        <div class="why-text">
+          <h2>Why Choose Us?</h2>
+          <p>We care about every aspect of cattle farming - from nutrition to health care - to ensure the health and well-being of our cattle. Our farms follow sustainable, ethical practices that prioritize animal welfare and environmental responsibility.</p>
+          <a href="{% url 'about' %}" class="btn">Learn More</a>
+        </div>
+      </div>
     </div>
-  </nav>
+  </section>
 
-  <main>
-    <!-- VIDEO HERO -->
-    <section class="video-section" id="hero">
-      <video id="heroVideo" playsinline loop preload="metadata">
-        <source src="{% static 'images/cattle-video.mp4' %}" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-
-      <button id="playOverlay" class="play-overlay" aria-hidden="true" title="Play video with sound">
-        <i class="fas fa-play"></i>
-        <span>Play</span>
-      </button>
-
-      <button id="muteToggle" class="mute-toggle" aria-pressed="false" title="Mute/unmute video">
-        <i class="fas fa-volume-up"></i>
-      </button>
-
-      <button id="pauseBtn" class="pause-video-btn" aria-label="Pause video">
-        <i class="fas fa-pause"></i>
-      </button>
-    </section>
-
-    <!-- Text below the video -->
-    <div class="video-text container">
-      <h1>Exporting Premium Cattle from Africa to the World</h1>
-      <p>We provide quality from the beginning.</p>
+  <section class="stats">
+    <div class="container">
+      <h2>Our Global Impact</h2>
+      <div class="stats-grid">
+        <div class="stat-item"><h3>500+</h3><p>Cattle Exported</p></div>
+        <div class="stat-item"><h3>15+</h3><p>Countries Served</p></div>
+        <div class="stat-item"><h3>98%</h3><p>Client Satisfaction</p></div>
+      </div>
     </div>
+  </section>
 
-    <!-- BENEFITS -->
-    <section class="benefits">
-      <div class="container">
-        <h2>Why Partner With Us?</h2>
-        <div class="benefits-grid" id="benefitsGrid">
-          <article class="benefit-card alt-left">
-            <div class="benefit-icon"><i class="fas fa-cow"></i></div>
-            <h3>Extensive Experience</h3>
-            <p>Decades of expertise in cattle breeding and export logistics across Africa.</p>
-          </article>
+  <section class="final-cta container" id="contact">
+    <h2 class="htwo">Ready to source premium cattle?</h2>
+    <p>Let’s talk about your needs and how we can deliver exceptional livestock to your doorstep.</p>
+    <a href="#contact" class="btn">Contact Us Today</a>
+  </section>
+</main>
 
-          <article class="benefit-card alt-right">
-            <div class="benefit-icon"><i class="fas fa-award"></i></div>
-            <h3>High Quality</h3>
-            <p>Only the healthiest, genetically superior cattle meet our strict standards.</p>
-          </article>
-
-          <article class="benefit-card alt-left">
-            <div class="benefit-icon"><i class="fas fa-headset"></i></div>
-            <h3>Excellent Service</h3>
-            <p>Dedicated support from inquiry to delivery — we’re with you every step.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHY CHOOSE US -->
-    <section class="why-choose">
-      <div class="container">
-        <div class="why-content">
-          <div class="why-image">
-            <img src="{% static 'images/doc.jpg' %}" alt="Healthy cattle">
-          </div>
-          <div class="why-text">
-            <h2>Why Choose Us?</h2>
-            <p>We care about every aspect of cattle farming - from nutrition to health care - to ensure the health and well-being of our cattle. Our farms follow sustainable, ethical practices that prioritize animal welfare and environmental responsibility.</p>
-            <a href="{% url 'about' %}" class="btn">Learn More</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- STATS -->
-    <section class="stats">
-      <div class="container">
-        <h2>Our Global Impact</h2>
-        <div class="stats-grid">
-          <div class="stat-item"><h3>500+</h3><p>Cattle Exported</p></div>
-          <div class="stat-item"><h3>15+</h3><p>Countries Served</p></div>
-          <div class="stat-item"><h3>98%</h3><p>Client Satisfaction</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FINAL CTA -->
-    <section class="final-cta container" id="contact">
-      <h2 class="htwo">Ready to source premium cattle?</h2>
-      <p>Let’s talk about your needs and how we can deliver exceptional livestock to your doorstep.</p>
-      <a href="{% url 'contact' %}" class="btn">Contact Us Today</a>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
 <footer class="modern-footer">
   <div class="footer-container">
     <div class="footer-col">
@@ -153,7 +100,7 @@
         <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'about' %}">About Us</a></li>
         <li><a href="{% url 'services' %}">Services</a></li>
-        <li><a href="{% url 'contact' %}">Contact</a></li>
+        <li><a href="{% url 'home' %}#contact">Contact</a></li>
       </ul>
     </div>
 
@@ -174,7 +121,7 @@
     </div>
 
     <div class="footer-col">
-      <h4>Contact</h4>
+      <h4>Contact</h4> <!-- ✅ Removed duplicate id="contact" -->
       <div class="contact-info">
         <p><i class="fas fa-envelope"></i> <a href="mailto:chaminvestementsco.ltd@gmail.com">chaminvestementsco.ltd@gmail.com</a></p>
         <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/250794444444" target="_blank">+250 794 444 444</a></p>
@@ -188,207 +135,148 @@
     <p>&copy; 2025 Cham Investment Co. Ltd. All rights reserved.</p>
   </div>
 </footer>
+{% endblock %}
 
-  <!-- JS -->
-  <script>
-    // NAV: mobile toggle
-    (function() {
-      const hamburger = document.getElementById('hamburger');
-      const mobileMenu = document.getElementById('mobileMenu');
-      if (!hamburger) return;
-      hamburger.addEventListener('click', () => {
-        mobileMenu.classList.toggle('open');
-        hamburger.classList.toggle('active');
-      });
-    })();
+{% block extra_js %}
+<script>
+  // VIDEO: autoplay, mute, play overlay
+  (function() {
+    const video = document.getElementById('heroVideo');
+    const muteToggle = document.getElementById('muteToggle');
+    const playOverlay = document.getElementById('playOverlay');
+    const pauseBtn = document.getElementById('pauseBtn');
 
-    // VIDEO: autoplay, mute, play overlay
-    (function() {
-      const video = document.getElementById('heroVideo');
-      const muteToggle = document.getElementById('muteToggle');
-      const playOverlay = document.getElementById('playOverlay');
-      const pauseBtn = document.getElementById('pauseBtn');
-
-      function tryPlayWithSound() {
-        if (!video) return;
-        video.loop = true;
-        const p = video.play();
-        if (p !== undefined) {
-          p.then(() => {
-            video.muted = false;
-            hidePlayOverlay();
-          }).catch(() => {
-            video.muted = true;
-            showPlayOverlay();
-          });
-        }
+    function showPlayOverlay() {
+      if (playOverlay) {
+        playOverlay.style.display = 'flex';
+        playOverlay.setAttribute('aria-hidden', 'false');
       }
-
-      function showPlayOverlay() {
-        if (playOverlay) {
-          playOverlay.style.display = 'flex';
-          playOverlay.setAttribute('aria-hidden', 'false');
-        }
+    }
+    function hidePlayOverlay() {
+      if (playOverlay) {
+        playOverlay.style.display = 'none';
+        playOverlay.setAttribute('aria-hidden', 'true');
       }
-      function hidePlayOverlay() {
-        if (playOverlay) {
-          playOverlay.style.display = 'none';
-          playOverlay.setAttribute('aria-hidden', 'true');
-        }
-      }
+    }
 
-      playOverlay && playOverlay.addEventListener('click', async () => {
-        try {
-          video.muted = false;
-          await video.play();
-          hidePlayOverlay();
-        } catch (err) {
-          video.muted = true;
-          await video.play().catch(()=>{});
+    playOverlay?.addEventListener('click', async () => {
+      try {
+        video.muted = false;
+        await video.play();
+        hidePlayOverlay();
+      } catch (err) {
+        video.muted = true;
+        await video.play().catch(() => {});
+        hidePlayOverlay();
+      }
+    });
+
+    if (muteToggle) {
+      const icon = muteToggle.querySelector('i');
+      muteToggle.addEventListener('click', () => {
+        video.muted = !video.muted;
+        muteToggle.setAttribute('aria-pressed', String(video.muted));
+        if (icon) {
+          icon.className = video.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+        }
+        if (!video.muted) {
+          video.play().catch(() => {});
           hidePlayOverlay();
         }
       });
 
-      if (muteToggle) {
-        const icon = muteToggle.querySelector('i');
-        muteToggle.addEventListener('click', () => {
-          video.muted = !video.muted;
-          muteToggle.setAttribute('aria-pressed', String(video.muted));
-          if (icon) {
-            icon.className = video.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
-          }
-          if (!video.muted) {
-            video.play().catch(()=>{});
-            hidePlayOverlay();
-          }
-        });
-
-        let hideTimer;
-        function scheduleHide() {
-          clearTimeout(hideTimer);
-          muteToggle.classList.add('visible');
-          hideTimer = setTimeout(()=> muteToggle.classList.remove('visible'), 3000);
-        }
-        const videoSection = document.querySelector('.video-section');
-        videoSection && videoSection.addEventListener('mousemove', scheduleHide);
-        videoSection && videoSection.addEventListener('touchstart', scheduleHide);
-        scheduleHide();
+      let hideTimer;
+      function scheduleHide() {
+        clearTimeout(hideTimer);
+        muteToggle.classList.add('visible');
+        hideTimer = setTimeout(() => muteToggle.classList.remove('visible'), 3000);
       }
-
-      tryPlayWithSound();
-      document.addEventListener('click', () => {
-        if (video && video.paused) {
-          video.play().catch(()=>{});
-        }
-      }, { once: true });
-    })();
-
-    // VIDEO: Pause button + auto-pause on scroll away + tap to pause
-    (function() {
-      const video = document.getElementById('heroVideo');
       const videoSection = document.querySelector('.video-section');
-      const pauseBtn = document.getElementById('pauseBtn');
-      if (!video || !videoSection || !pauseBtn) return;
+      videoSection?.addEventListener('mousemove', scheduleHide);
+      videoSection?.addEventListener('touchstart', scheduleHide);
+      scheduleHide();
+    }
 
-      videoSection.addEventListener('click', () => {
-        if (video.paused) {
-          video.play();
-          pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        } else {
+    // Force play on load
+    if (video) {
+      video.muted = true;
+      video.play().catch(() => showPlayOverlay());
+    }
+  })();
+
+  // VIDEO: Pause on scroll away
+  (function() {
+    const video = document.getElementById('heroVideo');
+    const videoSection = document.querySelector('.video-section');
+    const pauseBtn = document.getElementById('pauseBtn');
+    if (!video || !videoSection || !pauseBtn) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting && !video.paused) {
           video.pause();
           pauseBtn.innerHTML = '<i class="fas fa-play"></i>';
         }
-        pauseBtn.classList.add('visible');
-        setTimeout(() => pauseBtn.classList.remove('visible'), 2000);
       });
+    }, { threshold: 0.1 });
+    observer.observe(videoSection);
+  })();
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting && !video.paused) {
-            video.pause();
-            pauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-          }
-        });
-      }, { threshold: 0.1 });
-      observer.observe(videoSection);
+  // CARDS animation
+  (function() {
+    const cards = document.querySelectorAll('.benefit-card');
+    if (!cards.length) return;
 
-      let hidePauseTimer;
-      function showPauseControl() {
-        pauseBtn.classList.add('visible');
-        clearTimeout(hidePauseTimer);
-        hidePauseTimer = setTimeout(() => pauseBtn.classList.remove('visible'), 2000);
-      }
-      videoSection.addEventListener('mousemove', showPauseControl);
-      videoSection.addEventListener('touchstart', showPauseControl);
-      showPauseControl();
-    })();
+    cards.forEach((c, i) => {
+      c.classList.remove('show','alt-left','alt-right');
+      c.classList.add(i % 2 === 0 ? 'alt-left' : 'alt-right');
+    });
 
-    // CARDS animation
-    (function() {
-      const cards = document.querySelectorAll('.benefit-card');
-      if (!cards.length) return;
-
-      cards.forEach((c, i) => {
-        c.classList.remove('show','alt-left','alt-right');
-        c.classList.add(i % 2 === 0 ? 'alt-left' : 'alt-right');
-      });
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          const el = entry.target;
-          const idx = Array.from(cards).indexOf(el);
-          if (entry.isIntersecting) {
-            setTimeout(() => el.classList.add('show'), idx * 300);
-          } else {
-            el.classList.remove('show');
-          }
-        });
-      }, { threshold: 0.25 });
-
-      cards.forEach(c => observer.observe(c));
-    })();
-
-    // FOOTER LOCATIONS
-    (function() {
-      const footerLabel = document.getElementById('footerLocationLabel');
-      const footerLocations = document.getElementById('footerLocations');
-      const parent = footerLabel.closest('.locations-wrap');
-
-      if (!footerLabel || !footerLocations || !parent) return;
-
-      parent.addEventListener('mouseenter', () => {
-        parent.classList.add('hover');
-        footerLocations.setAttribute('aria-hidden','false');
-      });
-      parent.addEventListener('mouseleave', () => {
-        parent.classList.remove('hover');
-        footerLocations.setAttribute('aria-hidden','true');
-      });
-
-      footerLabel.addEventListener('click', (e) => {
-        e.preventDefault();
-        const isOpen = parent.classList.toggle('hover');
-        footerLocations.setAttribute('aria-hidden', String(!isOpen));
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!parent.contains(e.target)) {
-          parent.classList.remove('hover');
-          footerLocations.setAttribute('aria-hidden','true');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const el = entry.target;
+        const idx = Array.from(cards).indexOf(el);
+        if (entry.isIntersecting) {
+          setTimeout(() => el.classList.add('show'), idx * 300);
+        } else {
+          el.classList.remove('show');
         }
       });
-    })();
+    }, { threshold: 0.25 });
 
-    // NAV LINKS: Add active class on tap
-    (function() {
-      const navLinks = document.querySelectorAll('.nav-links a');
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.forEach(l => l.classList.remove('active'));
-          link.classList.add('active');
-        });
-      });
-    })();
-  </script>
-</body>
-</html>
+    cards.forEach(c => observer.observe(c));
+  })();
+
+  // FOOTER LOCATIONS
+  (function() {
+    const footerLabel = document.getElementById('footerLocationLabel');
+    const footerLocations = document.getElementById('footerLocations');
+    const parent = footerLabel.closest('.locations-wrap');
+
+    if (!footerLabel || !footerLocations || !parent) return;
+
+    parent.addEventListener('mouseenter', () => {
+      parent.classList.add('hover');
+      footerLocations.setAttribute('aria-hidden','false');
+    });
+    parent.addEventListener('mouseleave', () => {
+      parent.classList.remove('hover');
+      footerLocations.setAttribute('aria-hidden','true');
+    });
+
+    footerLabel.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isOpen = parent.classList.toggle('hover');
+      footerLocations.setAttribute('aria-hidden', String(!isOpen));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!parent.contains(e.target)) {
+        parent.classList.remove('hover');
+        footerLocations.setAttribute('aria-hidden','true');
+      }
+    });
+  })();
+</script>
+{% endblock %}
+

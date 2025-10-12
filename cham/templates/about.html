@@ -1,78 +1,26 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Premium Cattle Export | Home</title>
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
-  <!-- main stylesheet -->
+{% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/about.css' %}">
-<link rel="stylesheet" href="{% static 'css/services.css' %}">
-<link rel="stylesheet" href="{% static 'css/home.css' %}">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-</head>
-<body>
+{% endblock %}
 
-  <!-- NAVBAR (unchanged) -->
-  <nav class="glass-navbar" id="navbar">
-    <div class="nav-container">
-      <div class="logo">
-        <a href="{% url 'home' %}">
-          <img src="{% static 'images/logo.png' %}" alt="Company logo">
-        </a>
-      </div>
-
-      <div class="nav-right">
-        <ul class="nav-links" id="navLinks">
-          <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
-          <li><a href="{% url 'about' %}" class="nav-link">About</a></li>
-          <li><a href="{% url 'services' %}" class="nav-link">Services</a></li>
-          <li><a href="{% url 'breeds' %}" class="nav-link">Breeds</a></li>
-          <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
-        </ul>
-
-        <button id="hamburger" class="hamburger" aria-label="Open menu" type="button">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-
-    <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
-      <ul class="nav-links" id="navLinks">
-        <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
-        <li><a href="{% url 'about' %}" class="nav-link">About</a></li>
-        <li><a href="{% url 'services' %}" class="nav-link">Services</a></li>
-        <li><a href="{% url 'breeds' %}" class="nav-link">Breeds</a></li>
-        <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- MAIN CONTENT -->
-
-  <!-- WELCOME / MISSION -->
+{% block content %}
+  <!-- HERO SECTION -->
   <section class="about-hero">
+    <div class="container hero-header">
+      <h1 class="hero-headline slide-in">Welcome to Cham Investment — Your Trusted Partner in Cattle Breeding</h1>
+    </div>
     <div class="container hero-content">
-      
-        
-        <div class="hero-image">
+      <div class="hero-image pop">
         <img src="{% static 'images/cham.jpg' %}" alt="Cattle farm">
       </div>
-      <div class="hero-text">
-         <h1>Welcome to Cham Investment — Your Trusted Partner in Cattle Breeding</h1>
+      <div class="hero-text slide-in">
         <p class="mission">
           We care about every aspect of cattle farming — from nutrition to health care — to ensure the health and well-being of our cattle. Our farms follow sustainable, ethical practices that prioritize animal welfare and environmental responsibility.
         </p>
       </div>
-     
-      </div>
-      
-    
+    </div>
   </section>
 
   <!-- VALUES SECTION -->
@@ -80,17 +28,17 @@
     <div class="container">
       <h2>Our Commitment to Excellence</h2>
       <div class="values-grid">
-        <div class="value-card">
+        <div class="value-card slide-in card">
           <div class="icon-bg"><i class="fas fa-shield-alt"></i></div>
           <h3>Extensive Experience</h3>
           <p>Decades of hands-on expertise across Africa and Asia — we understand the land, the livestock, and the logistics.</p>
         </div>
-        <div class="value-card">
+        <div class="value-card slide-in card">
           <div class="icon-bg"><i class="fas fa-seedling"></i></div>
           <h3>High Quality</h3>
           <p>Only the healthiest, genetically superior cattle pass our rigorous standards — because quality starts at the source.</p>
         </div>
-        <div class="value-card">
+        <div class="value-card slide-in card">
           <div class="icon-bg"><i class="fas fa-handshake"></i></div>
           <h3>Excellent Service</h3>
           <p>From first inquiry to final delivery — we’re here to support you with transparency, speed, and personalized care.</p>
@@ -102,48 +50,92 @@
   <!-- WHO WE ARE -->
   <section class="who-we-are">
     <div class="container who-content">
-      
-      <div class="who-text">
+      <div class="who-text slide-in">
         <h2>Who We Are</h2>
-        <div class="who-image">
-          
-        <img src="{% static 'images/workers.jpg' %}" alt="Cham Investment Team">
-      </div>
         <p>
-          Headquartered in <strong>Indonesia(Jakarta)</strong>, with operations across <strong>Sudan, Kenya, Rwanda, Uganda, Malaysia, and Vietnam</strong>, Cham Investment has been exporting premium cattle to global markets since <strong>2012</strong>. We are not just exporters — we are stewards of quality, ethics, and sustainable growth in global livestock trade.
+          Headquartered in <strong>Indonesia (Jakarta)</strong>, with operations across <strong>Sudan, Kenya, Rwanda, Uganda, Malaysia, and Vietnam</strong>, Cham Investment has been exporting premium cattle to global markets since <strong>2012</strong>. We are not just exporters — we are stewards of quality, ethics, and sustainable growth in global livestock trade.
         </p>
+      </div>
+      <div class="who-image pop">
+        <img src="{% static 'images/workers.jpg' %}" alt="Cham Investment Team">
       </div>
     </div>
   </section>
+  {% endblock %}
 
+  
+{% block extra_js %}
+
+  <!-- Scroll & Animation Script -->
   <script>
-    // NAV & MENU
-    (function() {
-      const navLinks = document.querySelectorAll('.nav-links a');
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.forEach(l => l.classList.remove('active'));
-          link.classList.add('active');
+    // Reusable function to reset and re-trigger animations
+    function resetAnimations() {
+      document.querySelectorAll('.slide-in, .value-card, .pop').forEach(el => {
+        el.classList.remove('visible');
+        if (el.classList.contains('value-card')) {
+          el.style.transform = 'scale(0.8)';
+          el.style.opacity = '0';
+        }
+        if (el.classList.contains('pop')) {
+          el.style.transform = 'scale(0.9)';
+          el.style.opacity = '0';
+        }
+      });
+    }
+
+    // Intersection Observer for all animated elements
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+
+          if (el.classList.contains('value-card')) {
+            el.style.transitionDelay = `${index * 0.15}s`;
+            el.classList.add('visible');
+          } else if (el.classList.contains('pop')) {
+            el.style.transitionDelay = `${index * 0.1}s`;
+            el.classList.add('visible');
+          } else {
+            el.classList.add('visible');
+          }
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all animated elements
+    document.querySelectorAll('.slide-in, .value-card, .pop').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Trigger animations on scroll up/down
+    window.addEventListener('scroll', () => {
+      // Optional: You can uncomment below to reset animations on scroll (for demo)
+      // But for performance, we rely on Intersection Observer
+    });
+
+    // Trigger on page load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.querySelectorAll('.slide-in, .value-card, .pop').forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (
+            rect.top < window.innerHeight &&
+            rect.bottom > 0 &&
+            rect.left < window.innerWidth &&
+            rect.right > 0
+          ) {
+            if (el.classList.contains('value-card')) {
+              el.style.transitionDelay = `${Array.from(document.querySelectorAll('.value-card')).indexOf(el) * 0.15}s`;
+            }
+            el.classList.add('visible');
+          }
         });
-      });
+      }, 300);
+    });
 
-      const hamburger = document.getElementById('hamburger');
-      const mobileMenu = document.getElementById('mobileMenu');
-      hamburger.addEventListener('click', () => {
-        mobileMenu.classList.toggle('open');
-        hamburger.classList.toggle('active');
-      });
-    })();
-
-    // SCROLL ANIMATION
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('show');
-      });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll('.hero-text, .hero-image, .who-text, .who-image').forEach(el => observer.observe(el));
+    
   </script>
-
-</body>
-</html>
+  {% endblock %}
